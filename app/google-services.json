@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "637715346118",
+    "firebase_url": "https://futour-b76b2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "futour-b76b2",
+    "storage_bucket": "futour-b76b2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637715346118:android:ce783dc1ad3a0ee32d1dc7",
+        "android_client_info": {
+          "package_name": "com.syzlnnuro.futourappv2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmyYii3vPfIn7Hn_J1_s1lhHtStt7xFgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

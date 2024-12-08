@@ -17,6 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+<!--        <ImageView-->
+<!--            android:id="@+id/back_icon"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:src="@drawable/baseline_arrow_circle_left_24"-->
+<!--            android:layout_gravity="start" />-->
+
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
@@ -64,7 +71,7 @@
         android:paddingBottom="13dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
-        android:background="@drawable/border"
+        android:background="@drawable/input_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -78,8 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        android:drawableLeft="@drawable/user"
+        android:background="@drawable/input_background"
+        android:drawableLeft="@drawable/email"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Email"
@@ -103,8 +110,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        android:drawableLeft="@drawable/user"
+        android:background="@drawable/input_background"
+        android:drawableLeft="@drawable/lock"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Password"
@@ -122,19 +129,45 @@
         app:layout_constraintTop_toBottomOf="@+id/emailInput"
         app:layout_constraintVertical_bias="0.05" />
 
+    <EditText
+        android:id="@+id/confirm_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/input_background"
+        android:drawableLeft="@drawable/lock"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingTop="13dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="13dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintVertical_bias="0.063" />
+
+
 
     <Button
         android:id="@+id/signupButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:backgroundTint="#A0CFFF"
+        android:backgroundTint="#BBE2EC"
         android:text="Register"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_pass"
         app:layout_constraintVertical_bias="0.276" />
 
     <TextView

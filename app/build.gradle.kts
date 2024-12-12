@@ -56,6 +56,10 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.firebase.auth)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("androidx.room:room-runtime:2.5.2") // Gunakan versi terbaru untuk kestabilan
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.firebase:firebase-auth:22.1.1")

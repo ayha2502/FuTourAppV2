@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.syzlnnuro.futourappv2.ListPlaceAdapter
+import com.syzlnnuro.futourappv2.data.ListPlaceAdapter
 import com.syzlnnuro.futourappv2.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

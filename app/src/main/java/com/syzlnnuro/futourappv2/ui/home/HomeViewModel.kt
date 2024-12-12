@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.syzlnnuro.futourappv2.ApiConfig
-import com.syzlnnuro.futourappv2.PlaceResponse
+import com.syzlnnuro.futourappv2.data. ApiConfig
+import com.syzlnnuro.futourappv2.data.PlaceResponse
+import com.syzlnnuro.futourappv2.data.ApiConfig
+import com.syzlnnuro.futourappv2.data.PlaceResponse
 import com.syzlnnuro.futourappv2.searchApi.SearchApiConfig
 import com.syzlnnuro.futourappv2.searchData.SearchRequest
 import com.syzlnnuro.futourappv2.searchData.SearchResponseItem

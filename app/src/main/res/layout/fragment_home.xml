@@ -1,136 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="50dp"
+    android:paddingTop="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:fillViewport="true">
 
-    <!-- Title Text -->
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Search Bar -->
-    <LinearLayout
-        android:id="@+id/etSearch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/text_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp">
-
-        <EditText
-            android:id="@+id/searchInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Search places..."
-            android:padding="8dp"
-            android:background="@drawable/border"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:id="@+id/searchButton"
+        <!-- Title Text -->
+        <TextView
+            android:id="@+id/text_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="8dp" />
-    </LinearLayout>
+            android:text="e"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp" />
 
-    <!-- Loading Indicator -->
-    <ProgressBar
-        android:id="@+id/progressBar_home"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/etSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        <!-- Search Bar -->
+        <LinearLayout
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp">
 
-    <!-- Categories Section -->
-    <TextView
-        android:id="@+id/tvCategories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Categories"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/progressBar_home"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+            <EditText
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Search places..."
+                android:padding="8dp"
+                android:background="@drawable/border"
+                android:layout_marginEnd="8dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCategories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tvCategories"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp" />
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green_btn"
+                android:text="Search"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="8dp" />
+        </LinearLayout>
 
-    <!-- Recommended Locations Section -->
-    <TextView
-        android:id="@+id/tvRecommendedLocations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recommended Locations"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/rvCategories"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+        <!-- Loading Indicator -->
+        <ProgressBar
+            android:id="@+id/progressBar_home"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/etSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecommendedLocations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tvRecommendedLocations"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp" />
+        <!-- Categories Section -->
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toBottomOf="@id/progressBar_home"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
 
-    <!-- Best Locations Section -->
-    <TextView
-        android:id="@+id/tvBestLocations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Best Locations"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/rvRecommendedLocations"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvCategories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBestLocations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tvBestLocations"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Recommended Locations Section -->
+        <TextView
+            android:id="@+id/tvRecommendedLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recommended Locations"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toBottomOf="@id/rvCategories"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecommendedLocations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvRecommendedLocations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="16dp" />
+
+        <!-- Best Locations Section -->
+        <TextView
+            android:id="@+id/tvBestLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Best Locations"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toBottomOf="@id/rvRecommendedLocations"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBestLocations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvBestLocations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

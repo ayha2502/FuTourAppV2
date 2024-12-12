@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.rvRecommendedLocations.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = recommendedAdapter
         }
 

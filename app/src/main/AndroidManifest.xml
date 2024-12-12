@@ -18,6 +18,15 @@
         android:theme="@style/Theme.FuTourAppV2"
         tools:targetApi="31">
         <activity
+            android:name=".searchView.SearchResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailPlaceActivity"
             android:exported="false" />
         <activity
@@ -38,7 +47,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

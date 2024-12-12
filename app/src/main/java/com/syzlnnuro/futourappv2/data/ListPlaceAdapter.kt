@@ -21,7 +21,7 @@ class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyLis
         inner class placeViewHolder (view: View) : RecyclerView.ViewHolder(view){
             val kategory : TextView = view.findViewById(R.id.tvCategory)
             val namePlace : TextView = view.findViewById(R.id.tvLocationName)
-            val descriptPlace : TextView = view.findViewById(R.id.tvDescription)
+            //val descriptPlace : TextView = view.findViewById(R.id.tvDescription)
             val imagePlace : ImageView = view.findViewById(R.id.ivLocationImage)
         }
 
@@ -35,7 +35,7 @@ class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyLis
         val place = places[position]
         holder.namePlace.text = place.name ?: "Nama tidak tersedia"
         holder.kategory.text = place.genre ?: "Kategory tidak tersedia"
-        holder.descriptPlace.text = place.description ?: "Deskripsi tidak tersedia"
+        //holder.descriptPlace.text = place.description ?: "Deskripsi tidak tersedia"
         val imageUrl = place.images?.firstOrNull() ?: "" // Ambil gambar pertama atau kosong
         Glide.with(holder.itemView.context)
             .load(imageUrl)

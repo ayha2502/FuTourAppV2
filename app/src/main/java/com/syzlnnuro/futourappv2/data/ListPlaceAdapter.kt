@@ -1,4 +1,4 @@
-package com.syzlnnuro.futourappv2
+package com.syzlnnuro.futourappv2.data
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,10 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-class ListPlaceAdapter (private var places: List<PlaceResponse> = emptyList()):
+import com.syzlnnuro.futourappv2.DetailPlaceActivity
+import com.syzlnnuro.futourappv2.R
+
+class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyList()):
     RecyclerView.Adapter<ListPlaceAdapter.placeViewHolder>(){
 
-    fun updatePlaces(newPlaces: List<PlaceResponse>) {
+    fun updatePlaces(newPlaces: List<ListofPlaceResponse>) {
         places = newPlaces
         notifyDataSetChanged()
     }

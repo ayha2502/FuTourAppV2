@@ -1,4 +1,4 @@
-package com.syzlnnuro.futourappv2
+package com.syzlnnuro.futourappv2.data
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize

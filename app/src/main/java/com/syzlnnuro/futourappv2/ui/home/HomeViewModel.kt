@@ -3,8 +3,13 @@ package com.syzlnnuro.futourappv2.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.syzlnnuro.futourappv2.ApiConfig
 import com.syzlnnuro.futourappv2.PlaceResponse
+import com.syzlnnuro.futourappv2.searchApi.SearchApiConfig
+import com.syzlnnuro.futourappv2.searchData.SearchRequest
+import com.syzlnnuro.futourappv2.searchData.SearchResponseItem
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +30,30 @@ class HomeViewModel : ViewModel() {
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
+
+    private val _searchResults = MutableLiveData<List<SearchResponseItem>>()
+    val searchResults: LiveData<List<SearchResponseItem>> get() = _searchResults
+
+    fun searchPlaces(description: String) {
+        _isLoading.value = true
+        val request = SearchRequest(description)
+
+        // Lakukan request ke API untuk mencari tempat
+        viewModelScope.launch {
+            try {
+                val response = SearchApiConfig().getSearchApiService("token").search(request)
+                if (response.searchResponse != null) {
+                    _searchResults.value = response.searchResponse?.filterNotNull() ?: emptyList()
+                } else {
+                    _error.value = "No results found"
+                }
+            } catch (e: Exception) {
+                _error.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
 
     fun fetchPlaces() {
         _isLoading.value = true

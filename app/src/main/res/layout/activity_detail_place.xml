@@ -1,70 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
-    <ProgressBar
-        android:id="@+id/progress_bar_detail"
-        android:layout_width="11dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
-
-    <ScrollView
+    <!-- Image Section with Favorite Button -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:fillViewport="true">
+        android:layout_height="250dp">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/black" />
 
-            <ImageView
-                android:id="@+id/image_place"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop" />
+        <ImageButton
+            android:id="@+id/favoriteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:background="@drawable/ic_favorite_border"
+            android:contentDescription="Favorite" />
+    </FrameLayout>
+
+    <!-- Title, Category, and Route Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/place_name"
+                android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/image_place"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
-                android:textSize="24sp"
+                android:text="Danau Toba"
+                android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/place_name"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
-
-            <Button
-                android:id="@+id/btn_link"
+                android:id="@+id/categoryTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/description"
-                android:text="Rute"
-                android:layout_marginTop="16dp" />
-        </RelativeLayout>
+                android:text="Lake"
+                android:textColor="#757575"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/routeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:text="Rute"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Scrollable Description Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Danau Toba adalah danau vulkanik terbesar di dunia yang terletak di Provinsi Sumatera Utara, Indonesia. Danau ini memiliki panjang sekitar 100 km dan lebar 30 km, dengan kedalaman mencapai 505 meter. Danau ini terbentuk akibat letusan gunung berapi supervolcano sekitar 74.000 tahun yang lalu, yang dikenal sebagai salah satu letusan terbesar di bumi."
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_fav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:src="@drawable/ic_favorite_border"
-        android:contentDescription="Favorite Button"
-        app:tint="@android:color/white" />
-</RelativeLayout>
+</LinearLayout>

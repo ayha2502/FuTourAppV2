@@ -1,8 +1,10 @@
 package com.syzlnnuro.futourappv2.searchView
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.syzlnnuro.futourappv2.DetailPlaceActivity
 import com.syzlnnuro.futourappv2.databinding.ActivitySearchResultBinding
 import com.syzlnnuro.futourappv2.searchAdapter.SearchAdapter
 import com.syzlnnuro.futourappv2.searchData.RecommendationItem
@@ -30,7 +32,14 @@ class SearchResultActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recommendations: List<RecommendationItem>) {
-        searchAdapter = SearchAdapter(recommendations)
+        searchAdapter = SearchAdapter(recommendations) { recommendation ->
+            // Navigasi ke DetailActivity saat item diklik
+            val intent = Intent(this, DetailPlaceActivity::class.java).apply {
+                putExtra("recommendation", recommendation)
+            }
+            startActivity(intent)
+        }
+
         binding.rvSearchResult.apply {
             layoutManager = LinearLayoutManager(this@SearchResultActivity)
             adapter = searchAdapter

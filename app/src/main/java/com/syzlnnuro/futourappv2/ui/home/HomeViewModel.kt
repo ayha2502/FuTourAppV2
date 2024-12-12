@@ -58,8 +58,8 @@ class HomeViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let { places ->
                         _categories.value = places // Contoh: Menyimpan hasil ke _categories
-                        _bestLocations.value = places
-                        _recommendedLocations.value = places
+                        _bestLocations.value = places.shuffled()
+                        _recommendedLocations.value = places.shuffled()
                     }
                 } else {
                     _error.value = "Failed to load places"

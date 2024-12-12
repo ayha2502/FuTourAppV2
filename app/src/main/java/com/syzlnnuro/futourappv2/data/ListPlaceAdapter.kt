@@ -19,20 +19,23 @@ class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyLis
         notifyDataSetChanged()
     }
         inner class placeViewHolder (view: View) : RecyclerView.ViewHolder(view){
-            val namePlace : TextView = view.findViewById(R.id.namaTempat)
-            val descriptPlace : TextView = view.findViewById(R.id.descrip)
-            val imagePlace : ImageView = view.findViewById(R.id.iv_place)
+            val kategory : TextView = view.findViewById(R.id.tvCategory)
+            val namePlace : TextView = view.findViewById(R.id.tvLocationName)
+            val descriptPlace : TextView = view.findViewById(R.id.tvDescription)
+            val imagePlace : ImageView = view.findViewById(R.id.ivLocationImage)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): placeViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
+            .inflate(R.layout.item_card, parent, false)
         return placeViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: placeViewHolder, position: Int) {
         val place = places[position]
         holder.namePlace.text = place.name ?: "Nama tidak tersedia"
+        holder.kategory.text = place.genre ?: "Kategory tidak tersedia"
+        holder.descriptPlace.text = place.description ?: "Deskripsi tidak tersedia"
         val imageUrl = place.images?.firstOrNull() ?: "" // Ambil gambar pertama atau kosong
         Glide.with(holder.itemView.context)
             .load(imageUrl)

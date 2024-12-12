@@ -56,7 +56,7 @@ class HomeViewModel : ViewModel() {
 
     fun fetchPlaces() {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getPlaces(active = 1)
+        val client = ApiConfig.getApiService("").getPlaces(active = 1)
         client.enqueue(object : Callback<List<ListofPlaceResponse>> {
             override fun onResponse(
                 call: Call<List<ListofPlaceResponse>>,
@@ -66,6 +66,8 @@ class HomeViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let { places ->
                         _categories.value = places // Contoh: Menyimpan hasil ke _categories
+                        _bestLocations.value = places
+                        _recommendedLocations.value = places
                     }
                 } else {
                     _error.value = "Failed to load places"

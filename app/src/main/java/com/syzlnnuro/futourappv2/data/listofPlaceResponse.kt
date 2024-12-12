@@ -24,5 +24,5 @@ data class ListofPlaceResponse(
 	val description: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null
-): Parcelable
+	val id: String? = null // Ubah ke String
+) : Parcelable

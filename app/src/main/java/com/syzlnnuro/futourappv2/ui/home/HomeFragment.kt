@@ -10,13 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.common.api.Api
 import com.syzlnnuro.futourappv2.data.ListPlaceAdapter
-import com.syzlnnuro.futourappv2.ResultActivity
 import com.syzlnnuro.futourappv2.databinding.FragmentHomeBinding
 import com.syzlnnuro.futourappv2.searchApi.SearchApiConfig
+import com.syzlnnuro.futourappv2.searchData.RecommendationItem
 import com.syzlnnuro.futourappv2.searchData.SearchRequest
-import com.syzlnnuro.futourappv2.searchData.SearchResponse
 import com.syzlnnuro.futourappv2.searchView.SearchResultActivity
 import kotlinx.coroutines.launch
 
@@ -25,13 +23,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: ListPlaceAdapter
-
-    private lateinit var recommendationsAdapter: ListPlaceAdapter
-    private lateinit var homeViewModel: HomeViewModel
     private lateinit var categoriesAdapter: ListPlaceAdapter
     private lateinit var recommendedAdapter: ListPlaceAdapter
     private lateinit var bestAdapter: ListPlaceAdapter
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,14 +46,12 @@ class HomeFragment : Fragment() {
         homeViewModel.fetchPlaces()
 
         setupSearchFeature()
-
     }
 
     private fun setupSearchFeature() {
         binding.searchButton.setOnClickListener {
             val query = binding.searchInput.text.toString().trim()
             if (query.isNotEmpty()) {
-
                 performSearch(query)
             } else {
                 Toast.makeText(requireContext(), "Please enter a search term", Toast.LENGTH_SHORT).show()
@@ -69,38 +62,28 @@ class HomeFragment : Fragment() {
     private fun performSearch(description: String) {
         val request = SearchRequest(description = description)
 
-        // Tampilkan loading indicator
         binding.progressBarHome.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             try {
-                val searchApiConfig = SearchApiConfig()
-                val searchApiService = searchApiConfig.getSearchApiService("your_token_here") // Ganti "your_token_here" dengan token yang valid
-                val response: SearchResponse = searchApiService.search(request)
-                handleSearchResponse(response)
+                val searchApiService = SearchApiConfig().getSearchApiService("your_token_here")
+                val response = searchApiService.search(request)
+                val searchResults = response.recommendation?.filterNotNull() ?: emptyList()
+                handleSearchResponse(searchResults)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(requireContext(), "Search failed: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
-                // Sembunyikan loading indicator
                 binding.progressBarHome.visibility = View.GONE
             }
         }
     }
 
-    private fun handleSearchResponse(response: SearchResponse) {
-        // Menampilkan genre yang diprediksi
-        //binding.tvCategories.text = "Predicted Genre: ${response.predictedGenre ?: "-"}"
-
-        // Ambil rekomendasi
-        val recommendations = response.searchResponse?.filterNotNull() ?: emptyList()
-
-        // Kirimkan data ke ResultActivity
+    private fun handleSearchResponse(response: List<RecommendationItem>) {
         val intent = Intent(requireContext(), SearchResultActivity::class.java)
-        intent.putParcelableArrayListExtra("recommendations", ArrayList(recommendations))
+        intent.putParcelableArrayListExtra("recommendations", ArrayList(response))
         startActivity(intent)
     }
-
 
     private fun setupRecyclerViews() {
         categoriesAdapter = ListPlaceAdapter(emptyList())
@@ -124,33 +107,28 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Observe Categories data
         homeViewModel.categories.observe(viewLifecycleOwner) { categories ->
             categories?.let {
-                categoriesAdapter.updatePlaces(it)  // Update the categories adapter
+                categoriesAdapter.updatePlaces(it)
             }
         }
 
-        // Observe Recommended Locations data
         homeViewModel.recommendedLocations.observe(viewLifecycleOwner) { recommended ->
             recommended?.let {
-                recommendedAdapter.updatePlaces(it)  // Update the recommended adapter
+                recommendedAdapter.updatePlaces(it)
             }
         }
 
-        // Observe Best Locations data
         homeViewModel.bestLocations.observe(viewLifecycleOwner) { best ->
             best?.let {
-                bestAdapter.updatePlaces(it)  // Update the best adapter
+                bestAdapter.updatePlaces(it)
             }
         }
 
-        // Observe loading state
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBarHome.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        // Observe error messages
         homeViewModel.error.observe(viewLifecycleOwner) { error ->
             error?.let {
                 Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()

@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.syzlnnuro.futourappv2.databinding.ItemCardResultBinding
-import com.syzlnnuro.futourappv2.searchData.SearchResponseItem
+import com.syzlnnuro.futourappv2.searchData.RecommendationItem
 
-class SearchAdapter(private var recommendations: List<SearchResponseItem>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter(private var recommendations: List<RecommendationItem>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     // ViewHolder untuk setiap item dalam RecyclerView
     class SearchViewHolder(private val binding: ItemCardResultBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(recommendation: SearchResponseItem) {
+        fun bind(recommendation: RecommendationItem) {
             binding.itemTitle.text = recommendation.name
             binding.itemCategory.text = recommendation.genre
             binding.itemDescription.text = recommendation.description
 
             // Misalnya, jika ada gambar untuk ditampilkan, kita bisa menambahkannya di sini
             recommendation.images?.firstOrNull()?.let { imageUrl ->
-                // Menggunakan Glide atau Picasso untuk menampilkan gambar
+                // Menggunakan Glide untuk menampilkan gambar
                 Glide.with(binding.itemImage.context)
                     .load(imageUrl)
                     .into(binding.itemImage)
@@ -42,7 +42,7 @@ class SearchAdapter(private var recommendations: List<SearchResponseItem>) : Rec
     override fun getItemCount(): Int = recommendations.size
 
     // Fungsi untuk memperbarui data di adapter
-    fun updateRecommendations(newRecommendations: List<SearchResponseItem>) {
+    fun updateRecommendations(newRecommendations: List<RecommendationItem>) {
         recommendations = newRecommendations
         notifyDataSetChanged()
     }

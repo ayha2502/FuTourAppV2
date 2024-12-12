@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syzlnnuro.futourappv2.databinding.ActivitySearchResultBinding
 import com.syzlnnuro.futourappv2.searchAdapter.SearchAdapter
-import com.syzlnnuro.futourappv2.searchData.SearchResponseItem
+import com.syzlnnuro.futourappv2.searchData.RecommendationItem
 
 data class SearchResponseItem(
     val name: String,
@@ -24,12 +24,12 @@ class SearchResultActivity : AppCompatActivity() {
         binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val recommendations = intent.getParcelableArrayListExtra<SearchResponseItem>("recommendations") ?: arrayListOf()
+        val recommendations = intent.getParcelableArrayListExtra<RecommendationItem>("recommendations") ?: arrayListOf()
 
         setupRecyclerView(recommendations)
     }
 
-    private fun setupRecyclerView(recommendations: List<SearchResponseItem>) {
+    private fun setupRecyclerView(recommendations: List<RecommendationItem>) {
         searchAdapter = SearchAdapter(recommendations)
         binding.rvSearchResult.apply {
             layoutManager = LinearLayoutManager(this@SearchResultActivity)

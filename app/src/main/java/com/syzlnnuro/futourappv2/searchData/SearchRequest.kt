@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class SearchRequest(
 
 	@field:SerializedName("description")
-	val description: String? = null
+	val description: String
 )

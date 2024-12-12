@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.syzlnnuro.futourappv2.data.ApiConfig
 import com.syzlnnuro.futourappv2.data.ListofPlaceResponse
 import com.syzlnnuro.futourappv2.searchApi.SearchApiConfig
+import com.syzlnnuro.futourappv2.searchData.RecommendationItem
 import com.syzlnnuro.futourappv2.searchData.SearchRequest
-import com.syzlnnuro.futourappv2.searchData.SearchResponseItem
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,25 +31,17 @@ class HomeViewModel : ViewModel() {
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
-    private val _searchResults = MutableLiveData<List<SearchResponseItem>>()
-    val searchResults: LiveData<List<SearchResponseItem>> get() = _searchResults
+    private val _searchResults = MutableLiveData<List<RecommendationItem>>()
+    val searchResults: LiveData<List<RecommendationItem>> get() = _searchResults
 
     fun searchPlaces(description: String) {
-        _isLoading.value = true
         val request = SearchRequest(description)
-
         viewModelScope.launch {
             try {
-                val response = SearchApiConfig().getSearchApiService("token").search(request)
-                if (response.searchResponse != null) {
-                    _searchResults.value = response.searchResponse?.filterNotNull() ?: emptyList()
-                } else {
-                    _error.value = "No results found"
-                }
+                val response = SearchApiConfig().getSearchApiService("your_token_here").search(request)
+                _searchResults.value = response.recommendation?.filterNotNull() ?: emptyList()
             } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
+                _searchResults.value = emptyList()
             }
         }
     }

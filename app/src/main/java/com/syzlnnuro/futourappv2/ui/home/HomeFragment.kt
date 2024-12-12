@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.common.api.Api
-import com.syzlnnuro.futourappv2.ListPlaceAdapter
+import com.syzlnnuro.futourappv2.data.ListPlaceAdapter
 import com.syzlnnuro.futourappv2.ResultActivity
 import com.syzlnnuro.futourappv2.databinding.FragmentHomeBinding
 import com.syzlnnuro.futourappv2.searchApi.SearchApiConfig

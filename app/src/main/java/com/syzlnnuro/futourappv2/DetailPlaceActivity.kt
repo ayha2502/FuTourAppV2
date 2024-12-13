@@ -18,6 +18,8 @@ class DetailPlaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPlaceBinding
     private lateinit var favoriteViewModel: FavoriteViewModel
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPlaceBinding.inflate(layoutInflater)

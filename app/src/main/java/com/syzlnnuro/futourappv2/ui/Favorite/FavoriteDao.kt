@@ -9,6 +9,10 @@ import androidx.room.Query
 interface FavoriteDao {
 
     // Menyisipkan data Favorite
+
+    @Query("SELECT * FROM place_table WHERE id = :id")
+    suspend fun getFavoriteByIdSuspend(id: String): Favorite?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(place: Favorite)
 

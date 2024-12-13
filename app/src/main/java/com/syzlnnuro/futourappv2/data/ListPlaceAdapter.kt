@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide
 import com.syzlnnuro.futourappv2.DetailPlaceActivity
 import com.syzlnnuro.futourappv2.R
 
-class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyList()):
+class ListPlaceAdapter (
+    private var places: List<ListofPlaceResponse> = emptyList()):
     RecyclerView.Adapter<ListPlaceAdapter.placeViewHolder>(){
 
     fun updatePlaces(newPlaces: List<ListofPlaceResponse>) {
@@ -47,7 +48,11 @@ class ListPlaceAdapter (private var places: List<ListofPlaceResponse> = emptyLis
             intent.putExtra("place", place)
             holder.itemView.context.startActivity(intent)
         }
+    }
 
+    fun submitList(newPlaces: List<ListofPlaceResponse>){
+        places = newPlaces
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = places.size

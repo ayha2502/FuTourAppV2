@@ -7,21 +7,10 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "place_table")
 data class Favorite(
     @PrimaryKey
-    @field:SerializedName("images")
-    val images: List<String?>? = null,
-
-    @field:SerializedName("genre")
-    val genre: String? = null,
-
-    @field:SerializedName("name")
-    val name: String? = null,
-
-    @field:SerializedName("rating")
-    val rating: Int? = null,
-
-    @field:SerializedName("description")
-    val description: String? = null,
-
-    @field:SerializedName("id")
-    val id: String? = null // Ubah ke String
+    val id: String,
+    val name: String,
+    val images: String?, // Simpan satu URL gambar saja
+    val genre: String?,
+    val description: String?,
+    val rating: Int?
 )

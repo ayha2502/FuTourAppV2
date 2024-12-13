@@ -12,9 +12,15 @@ import kotlinx.coroutines.withContext
 
 class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val favoriteDao = AppDatabase.getDatabase(application).favoriteDao()
-    private val repository = FavoriteRepository(favoriteDao)
+    private val favoriteDao: FavoriteDao
+    private val repository: FavoriteRepository
 
+    init {
+        // Pastikan AppDatabase sudah diimport dan tersedia
+        val database = AppDatabase.getDatabase(application)
+        favoriteDao = database.favoriteDao()
+        repository = FavoriteRepository(favoriteDao)
+    }
     // LiveData untuk semua data favorit
     val favorites: LiveData<List<Favorite>> = repository.getAllFavorites()
 

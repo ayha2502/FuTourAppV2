@@ -26,10 +26,10 @@ class DetailPlaceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Inisialisasi ViewModel
-        favoriteViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[FavoriteViewModel::class.java]
+//        favoriteViewModel = ViewModelProvider(
+//            this,
+//            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+//        )[FavoriteViewModel::class.java]
 
 
 
@@ -64,44 +64,44 @@ class DetailPlaceActivity : AppCompatActivity() {
                     .into(binding.imageView)
             }
         }
-        lifecycleScope.launch {
-            place?.let { placeData ->
-                val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
-
-                if (isFavorite) {
-                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
-                } else {
-                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            place?.let { placeData ->
+//                val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
+//
+//                if (isFavorite) {
+//                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
+//                } else {
+//                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
+//                }
+//            }
+//        }
 
         // Logika tombol favorite
-        binding.favoriteButton.setOnClickListener {
-            place?.let { placeData ->
-                lifecycleScope.launch {
-                    val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
-                    if (isFavorite) {
-                        // Jika sudah di favorit, hapus
-                        favoriteViewModel.removeFavorite(placeData.id ?: "")
-                        Toast.makeText(this@DetailPlaceActivity, "Removed from Favorite", Toast.LENGTH_SHORT).show()
-                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
-                    } else {
-                        // Jika belum di favorit, tambahkan
-                        val favorite = Favorite(
-                            id = placeData.id ?: "",
-                            name = placeData.name ?: "Nama tidak tersedia",
-                            images = placeData.images?.firstOrNull(),
-                            genre = placeData.genre,
-                            description = placeData.description,
-                            rating = placeData.rating
-                        )
-                        favoriteViewModel.addFavorite(favorite)
-                        Toast.makeText(this@DetailPlaceActivity, "Added to Favorite", Toast.LENGTH_SHORT).show()
-                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
-                    }
-                }
-            }
-        }
+//        binding.favoriteButton.setOnClickListener {
+//            place?.let { placeData ->
+//                lifecycleScope.launch {
+//                    val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
+//                    if (isFavorite) {
+//                        // Jika sudah di favorit, hapus
+//                        favoriteViewModel.removeFavorite(placeData.id ?: "")
+//                        Toast.makeText(this@DetailPlaceActivity, "Removed from Favorite", Toast.LENGTH_SHORT).show()
+//                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
+//                    } else {
+//                        // Jika belum di favorit, tambahkan
+//                        val favorite = Favorite(
+//                            id = placeData.id ?: "",
+//                            name = placeData.name ?: "Nama tidak tersedia",
+//                            images = placeData.images?.firstOrNull(),
+//                            genre = placeData.genre,
+//                            description = placeData.description,
+//                            rating = placeData.rating
+//                        )
+//                        favoriteViewModel.addFavorite(favorite)
+//                        Toast.makeText(this@DetailPlaceActivity, "Added to Favorite", Toast.LENGTH_SHORT).show()
+//                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
+//                    }
+//                }
+//            }
+//        }
     }
 }

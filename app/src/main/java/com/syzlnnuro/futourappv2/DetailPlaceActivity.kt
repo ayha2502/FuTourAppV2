@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.syzlnnuro.futourappv2.data.ListofPlaceResponse
 import com.syzlnnuro.futourappv2.databinding.ActivityDetailPlaceBinding
 import com.syzlnnuro.futourappv2.searchData.RecommendationItem
 import com.syzlnnuro.futourappv2.ui.Favorite.Favorite
 import com.syzlnnuro.futourappv2.ui.Favorite.FavoriteViewModel
+import kotlinx.coroutines.launch
 
 class DetailPlaceActivity : AppCompatActivity() {
 
@@ -22,7 +24,11 @@ class DetailPlaceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Inisialisasi ViewModel
-        favoriteViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+        favoriteViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        )[FavoriteViewModel::class.java]
+
 
 
         // Mendapatkan data yang dikirim dari SearchResultActivity
@@ -56,21 +62,44 @@ class DetailPlaceActivity : AppCompatActivity() {
                     .into(binding.imageView)
             }
         }
-        // Logika tombol favorite
-        binding.favoriteButton.setOnClickListener {
+        lifecycleScope.launch {
             place?.let { placeData ->
-                val favorite = Favorite(
-                    id = placeData.id ?: "",
-                    name = placeData.name ?: "Nama tidak tersedia",
-                    images = placeData.images?.firstOrNull(),
-                    genre = placeData.genre,
-                    description = placeData.description,
-                    rating = placeData.rating
-                )
-                favoriteViewModel.addFavorite(favorite) // Simpan data ke database
-                Toast.makeText(this, "Added to Favorite", Toast.LENGTH_SHORT).show()
+                val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
+
+                if (isFavorite) {
+                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
+                } else {
+                    binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
+                }
             }
         }
 
+        // Logika tombol favorite
+        binding.favoriteButton.setOnClickListener {
+            place?.let { placeData ->
+                lifecycleScope.launch {
+                    val isFavorite = favoriteViewModel.isFavorite(placeData.id?.toIntOrNull() ?: 0)
+                    if (isFavorite) {
+                        // Jika sudah di favorit, hapus
+                        favoriteViewModel.removeFavorite(placeData.id ?: "")
+                        Toast.makeText(this@DetailPlaceActivity, "Removed from Favorite", Toast.LENGTH_SHORT).show()
+                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border) // Icon default
+                    } else {
+                        // Jika belum di favorit, tambahkan
+                        val favorite = Favorite(
+                            id = placeData.id ?: "",
+                            name = placeData.name ?: "Nama tidak tersedia",
+                            images = placeData.images?.firstOrNull(),
+                            genre = placeData.genre,
+                            description = placeData.description,
+                            rating = placeData.rating
+                        )
+                        favoriteViewModel.addFavorite(favorite)
+                        Toast.makeText(this@DetailPlaceActivity, "Added to Favorite", Toast.LENGTH_SHORT).show()
+                        binding.favoriteButton.setImageResource(R.drawable.ic_favorite_filled) // Icon merah
+                    }
+                }
+            }
+        }
     }
 }

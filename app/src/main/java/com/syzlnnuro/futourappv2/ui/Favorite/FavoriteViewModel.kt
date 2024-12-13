@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.syzlnnuro.futourappv2.data.ListofPlaceResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,6 +29,11 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
     fun removeFavorite(favoriteId: String) {
         viewModelScope.launch {
             repository.removeFavoriteById(favoriteId)
+        }
+    }
+    suspend fun isFavorite(id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            repository.isFavorite(id)
         }
     }
 }

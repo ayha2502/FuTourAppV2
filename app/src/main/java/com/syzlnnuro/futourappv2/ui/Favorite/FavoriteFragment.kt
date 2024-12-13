@@ -31,6 +31,12 @@ class FavoriteFragment : Fragment() {
 
         setupRecyclerView()
         observeData()
+
+        favoriteViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        )[FavoriteViewModel::class.java]
+
     }
 
     private fun setupRecyclerView() {
@@ -47,13 +53,10 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun observeData() {
-        favoriteViewModel.favorites.observe(viewLifecycleOwner) { places ->
-            favoriteAdapter.submitList(places)
-            if (places.isEmpty()) {
-                binding.rvFav.visibility = View.VISIBLE
-            } else {
-                binding.rvFav.visibility = View.GONE
-            }
+        favoriteViewModel.favorites.observe(viewLifecycleOwner) { favoriteList ->
+            // Perbarui RecyclerView dengan daftar favorit terbaru
+            favoriteAdapter.submitList(favoriteList)
         }
+
     }
 }
